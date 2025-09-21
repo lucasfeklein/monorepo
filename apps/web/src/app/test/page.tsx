@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { Authenticated, Unauthenticated, useQuery } from "convex/react";
 import { api } from "../../../../../packages/backend/convex/_generated/api";
 
 const Test = () => {
@@ -9,20 +9,19 @@ const Test = () => {
 
   return (
     <div>
-      <h1>Test Page with ConvexClientProvider</h1>
-      <p>Convex provider is working!</p>
-      {tasks ? (
+      <Authenticated>
         <div>
           <h2>Tasks:</h2>
           <ul>
-            {tasks.map((task) => (
+            {tasks?.map((task) => (
               <li key={task._id}>{task.text}</li>
             ))}
           </ul>
         </div>
-      ) : (
-        <p>Loading tasks...</p>
-      )}
+      </Authenticated>
+      <Unauthenticated>
+        <p>Logged out</p>
+      </Unauthenticated>
     </div>
   );
 };
