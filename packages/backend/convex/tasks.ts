@@ -9,8 +9,11 @@ export const get = query({
 });
 
 export const create = mutation({
-  args: { text: v.string() },
+  args: { text: v.string(), isCompleted: v.boolean() },
   handler: async (ctx, args) => {
-    return await ctx.db.insert("tasks", { text: args.text });
+    return await ctx.db.insert("tasks", {
+      text: args.text,
+      isCompleted: args.isCompleted,
+    });
   },
 });
